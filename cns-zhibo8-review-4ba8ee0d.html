@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 · 直播吧资料整理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fee9c8 0%, #fbd9b0 45%, #f5c89a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+            color: #2e241c;
+        }
+        .page-wrap {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 (hero) */
+        .hero-card {
+            background: #fffcf5;
+            border-radius: 2.5rem;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(150, 100, 50, 0.18);
+            transition: box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #f8d5a3 0%, transparent 70%);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .hero-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #3d2c1c;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: #5e4a38;
+            max-width: 720px;
+            line-height: 1.7;
+            margin-bottom: 0.6rem;
+        }
+        .hero-meta {
+            display: inline-block;
+            background: #e9d8c0;
+            color: #3a2c1e;
+            font-size: 0.85rem;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+        }
+
+        /* 双列信息卡片区 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .info-card {
+            background: #fffcf5;
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 10px 25px -8px rgba(130, 80, 30, 0.12);
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px -10px rgba(110, 70, 25, 0.16);
+        }
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+            background: #f3e4d0;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3b2b1b;
+            margin-bottom: 0.8rem;
+        }
+        .card-text {
+            color: #4d3b2b;
+            font-size: 0.98rem;
+            margin-bottom: 0.6rem;
+        }
+        .card-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.2rem;
+        }
+        .card-list li {
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: #4f3e2e;
+        }
+        .card-list li::before {
+            content: '·';
+            position: absolute;
+            left: 0.2rem;
+            color: #b3875c;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* 适合人群 + 自然链接段落 */
+        .audience-section {
+            background: #fffcf5;
+            border-radius: 2rem;
+            padding: 2rem 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px -8px rgba(130, 80, 30, 0.12);
+        }
+        .section-head {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #3b2b1b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .audience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.8rem 0 1rem;
+        }
+        .tag {
+            background: #f0e1ce;
+            color: #3d2e1e;
+            font-size: 0.9rem;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 450;
+        }
+        .link-paragraph {
+            background: #f8efe4;
+            padding: 1rem 1.4rem;
+            border-radius: 1.5rem;
+            margin: 1rem 0 0.2rem;
+            font-size: 1rem;
+            color: #423223;
+        }
+        .link-paragraph a {
+            color: #9f6e3e;
+            text-decoration: none;
+            font-weight: 550;
+            border-bottom: 1.5px solid #dbba92;
+            transition: color 0.1s, border-color 0.15s;
+        }
+        .link-paragraph a:hover {
+            color: #7a512b;
+            border-bottom-color: #7a512b;
+        }
+
+        /* FAQ 摘要卡片 (折叠型) */
+        .faq-block {
+            background: #fffcf5;
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 10px 25px -8px rgba(130, 80, 30, 0.12);
+            margin-bottom: 1.5rem;
+        }
+        .faq-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #ebe0d0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 600;
+            color: #3b2b1b;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: default;
+        }
+        .faq-q span {
+            font-size: 0.9rem;
+            color: #a5835f;
+        }
+        .faq-a {
+            color: #544234;
+            font-size: 0.93rem;
+            padding-top: 0.25rem;
+            padding-right: 1rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            color: #564433;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            padding: 0.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 780px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .audience-section,
+            .faq-block {
+                padding: 1.6rem 1.3rem;
+            }
+            .link-paragraph {
+                padding: 0.8rem 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .card-icon {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <div class="hero-title">📋 资料整理 · 信息索引</div>
+        <div class="hero-sub">
+            围绕体育资讯与赛事直播，从内容归类的角度梳理 <strong>直播吧</strong> 所承载的信息脉络。
+            这里不追求速度，只希望把分散的条目整理成便于查阅的卡片。
+        </div>
+        <div class="hero-meta">整理编号 · 索引 v1.3</div>
+    </div>
+
+    <!-- 双栏信息卡片：用途卡片 + 信息归类 -->
+    <div class="card-grid">
+        <div class="info-card">
+            <div class="card-icon">📌</div>
+            <div class="card-title">常用用途</div>
+            <ul class="card-list">
+                <li>实时比分与赛程一览</li>
+                <li>热门联赛数据汇总</li>
+                <li>赛后简报与动态聚合</li>
+                <li>赛事回放及集锦导航</li>
+            </ul>
+            <div class="card-text" style="margin-top: 0.6rem;">
+                对于经常关注足球、篮球的用户来说，这些条目构成了日常检索的主体。
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">🗂️</div>
+            <div class="card-title">信息归类角度</div>
+            <div class="card-text">
+                将内容按赛事类型、时效性、队伍维度进行整理，方便横向对比与纵向追溯。
+            </div>
+            <ul class="card-list">
+                <li>按联赛分 · 英超 / 西甲 / 中超 / NBA</li>
+                <li>按时间分 · 进行中 / 今日 / 本周</li>
+                <li>按队伍分 · 关注球队专属动态</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 适合人群 + 自然链接段落（融合在一个卡片里） -->
+    <div class="audience-section">
+        <div class="section-head">👥 适合这样的人群</div>
+        <div class="audience-tags">
+            <span class="tag">日常体育爱好者</span>
+            <span class="tag">多联赛跟踪者</span>
+            <span class="tag">赛后数据分析派</span>
+            <span class="tag">信息整理控</span>
+        </div>
+        <div class="link-paragraph">
+            💡 如果你习惯在一个地方集中浏览比赛动态、比分变化和队伍新闻，
+            可以试试将 <a href="https://cns-zhibo8.com">直播吧</a> 作为信息面板。
+            这种聚合方式省去了跨平台搜索的麻烦，尤其适合同时关注多个联赛的人。
+        </div>
+        <div class="link-paragraph" style="background: #f5eade; margin-top: 0.8rem;">
+            🔗 对于希望保持信息统一入口的用户，<a href="https://cns-zhibo8.com">直播吧</a> 提供了一条比较轻量的索引路径。
+            归类本身也是一种效率，不必在多个标签页之间反复切换。
+        </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-block">
+        <div style="font-size: 1.3rem; font-weight: 600; color: #3b2b1b; margin-bottom: 0.6rem;">📖 常见疑问摘要</div>
+        <div class="faq-item">
+            <div class="faq-q">信息更新频率如何？ <span>⏱️</span></div>
+            <div class="faq-a">比赛期间数据通常实时刷新，赛后简报一般在完场后数分钟内归档。具体视源数据同步情况而定。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否涵盖所有体育项目？ <span>🏀⚽</span></div>
+            <div class="faq-a">以足球、篮球为主，辅以网球、电子竞技等热门赛事的即时信息。覆盖面会随赛季调整。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">资料整理是否有分类偏好？ <span>📂</span></div>
+            <div class="faq-a">倾向按联赛权重和用户关注度排序，同时保留自定义筛选的可能性。</div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        — 信息卡片式 · 从资料整理视角出发 —
+    </div>
+</div>
+</body>
+</html>
