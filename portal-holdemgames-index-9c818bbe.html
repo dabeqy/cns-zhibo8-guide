@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德州扑克游戏 | 牌桌入口 · 信息卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f2f2;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d2d2d;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ---- hero 卡片 ---- */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #e6e6e6;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card:hover {
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+        }
+
+        .hero-card h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #1c1c1c;
+            line-height: 1.2;
+        }
+
+        .hero-card p {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            max-width: 90%;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-link {
+            display: inline-block;
+            background: #2a6b4c;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 1px solid #1f593e;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .hero-link:hover {
+            background: #1f593e;
+            transform: scale(1.02);
+        }
+
+        /* ---- 卡片网格 ---- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+
+            .hero-card p {
+                max-width: 100%;
+            }
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: border 0.15s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: #cbd5cd;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-card h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1f2a24;
+            border-left: 4px solid #2a6b4c;
+            padding-left: 0.9rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card ul li {
+            padding: 0.35rem 0 0.35rem 1.2rem;
+            position: relative;
+            color: #3d3d3d;
+            font-size: 0.95rem;
+        }
+
+        .info-card ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2a6b4c;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #4a4a4a;
+            font-size: 0.95rem;
+        }
+
+        /* ---- 长段落卡片 ---- */
+        .section-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.2rem 2.5rem;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            margin-bottom: 2rem;
+        }
+
+        .section-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #1c1c1c;
+        }
+
+        .section-card p {
+            margin-bottom: 1rem;
+            color: #3b3b3b;
+        }
+
+        .section-card a {
+            color: #2a6b4c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .section-card a:hover {
+            color: #1c4936;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0 0.5rem;
+        }
+
+        .tag {
+            background: #eef2ef;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #2d4b3a;
+            border: 1px solid #d9e1db;
+            font-weight: 500;
+        }
+
+        .faq-quote {
+            background: #f7f9f8;
+            border-left: 4px solid #2a6b4c;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.2rem 0 0.8rem;
+            font-style: normal;
+        }
+
+        .faq-quote strong {
+            color: #1d362a;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6f7a73;
+            padding: 2rem 0 0.5rem;
+            border-top: 1px solid #dadfd9;
+            margin-top: 1rem;
+        }
+
+        .footer-note a {
+            color: #2a6b4c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 主视觉 -->
+    <div class="hero-card">
+        <h1>德州扑克游戏 · 稳定入口</h1>
+        <p>一个专注策略与心理博弈的桌面世界。无论是初探规则还是精进技术，清晰的信息卡总能帮助你更快进入状态。下面从用途、人群到常见疑问，梳理出这份简明的页面说明。</p>
+        <a href="https://portal-holdemgames.com" class="hero-link">德州扑克游戏</a>
+    </div>
+
+    <!-- 信息卡片网格：用途卡片 + 适合人群 -->
+    <div class="card-grid">
+        <div class="info-card">
+            <h2>用途卡片</h2>
+            <ul>
+                <li>练习翻前范围与位置意识</li>
+                <li>模拟现金桌与锦标赛节奏</li>
+                <li>分析底池赔率与隐含赔率</li>
+                <li>复盘历史牌局，优化决策流</li>
+                <li>多人桌社交与阅读对手习惯</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">现金桌</span>
+                <span class="tag">锦标赛</span>
+                <span class="tag">单挑</span>
+                <span class="tag">限注</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>适合人群</h2>
+            <ul>
+                <li>希望系统化学习概率的业余玩家</li>
+                <li>寻找干净对局环境的休闲牌手</li>
+                <li>需要稳定数据记录的中级玩家</li>
+                <li>对范围构建和弃牌率敏感的爱好者</li>
+                <li>想在低压力下练习心理博弈的新手</li>
+            </ul>
+            <p style="margin-top: 0.8rem; color: #5a5a5a;">无论你的目标是什么，<a href="https://portal-holdemgames.com" style="text-decoration: underline; color: #2a6b4c;">德州扑克游戏</a>都可以作为你打磨技术的参考入口之一。</p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 + 场景描述 -->
+    <div class="section-card">
+        <h2>从稳定入口到页面说明</h2>
+        <p>
+            围绕 <a href="https://portal-holdemgames.com">德州扑克游戏</a> 建立的信息卡片，旨在减少碎片化干扰，让牌手更专注于决策本身。主视觉卡片直接链接到桌面，而用途卡片则概括了实战中最常被调用的场景：范围构建、底池控制、对手倾向记录。
+        </p>
+        <p>
+            对于刚接触德州扑克的人，最实用的起点往往是理解位置和起手牌选择。而已经具备一定经验的玩家，则可以在牌局间隙利用此类入口快速检索翻前表格或标准下注尺寸。页面本身不提供教学承诺，仅作为信息组织方式，帮助使用者自行判断下一步行动。
+        </p>
+        <div class="faq-quote">
+            <strong>FAQ 摘要：</strong> “是否需要注册？” —— 不，牌桌入口直接开放，无强制注册步骤。<br>
+            “支持哪些设备？” —— 主流桌面与移动浏览器均可适配，卡片布局随视口自适应。<br>
+            “是否有实时对局？” —— 页面为说明性质，具体对局功能由网站自身决定。
+        </div>
+    </div>
+
+    <!-- 提示与总结卡片 -->
+    <div class="section-card" style="padding-bottom: 1.8rem;">
+        <h2>提示与参考</h2>
+        <p>
+            信息卡片式设计的优势在于：每个区域独立承载一个主题，且视觉上通过细边框和柔和阴影保持清爽。使用者可以快速扫过，找到自己关心的部分。例如用途卡片偏重练习维度，适合人群卡片则按经验水平划分。如果你寻找具体的对局入口，上文已经嵌入了指向 <a href="https://portal-holdemgames.com">德州扑克游戏</a> 的链接。
+        </p>
+        <p>
+            这种页面结构也方便后续增加新的卡片，例如“常见术语卡”或“概率速查卡”。保持内容的真实与克制，不夸大收益，也不制造焦虑，是这份说明的底层原则。
+        </p>
+        <div style="background: #fafbfa; border-radius: 14px; padding: 1rem 1.5rem; margin-top: 1rem;">
+            <span style="font-weight: 600; color: #1f2a24;">一句话总结：</span>稳定入口 + 信息卡片 = 清晰的页面说明，适合想直接接触德州扑克游戏的人。
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <span>卡片式页面 · 浅灰背景 · 细边框柔阴影</span><br>
+        <span style="font-size: 0.8rem;">更多内容请访问 <a href="https://portal-holdemgames.com">德州扑克游戏</a></span>
+    </div>
+
+</div>
+</body>
+</html>
